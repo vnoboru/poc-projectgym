@@ -14,3 +14,14 @@ export async function insertUnique(exercice: Exercice): Promise<QueryResult> {
     [exercice.title, exercice.bodyPart]
   );
 }
+
+export async function findMany(): Promise<QueryResult<Exercice>> {
+  return await connection.query(
+    `
+    SELECT
+      *
+    FROM
+      exercices
+    `
+  );
+}
