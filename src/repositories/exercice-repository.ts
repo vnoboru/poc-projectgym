@@ -1,3 +1,4 @@
+import { StringRegexOptions } from "joi";
 import { Query, QueryResult } from "pg";
 import connection from "../db/database.js";
 import { Exercice } from "../protocols/Exercice.js";
@@ -40,7 +41,7 @@ export async function updateUnique(exercice: Exercice): Promise<QueryResult> {
   );
 }
 
-export async function deleteUnique(exercice: Exercice): Promise<QueryResult> {
+export async function deleteUnique(id: Number): Promise<QueryResult> {
   return await connection.query(
     `
     DELETE FROM
@@ -48,7 +49,7 @@ export async function deleteUnique(exercice: Exercice): Promise<QueryResult> {
     WHERE
       id = $1
     `,
-    [exercice.id]
+    [id]
   );
 }
 

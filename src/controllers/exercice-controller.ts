@@ -59,17 +59,9 @@ export async function updateExercice(req: Request, res: Response) {
 }
 
 export async function deleteExercice(req: Request, res: Response) {
-  const remove = req.body as Exercice;
-  const { error } = exerciceSchema.validate(remove);
-
-  if (error) {
-    return res.status(400).send({
-      message: error.message,
-    });
-  }
-
   try {
-    const deleteData = await repos.deleteUnique(remove);
+    const { id } = req.params;
+    const deleteData = await repos.deleteUnique(Number(id));
 
     if(deleteData.rowCount === 0){
       return res.sendStatus(404);
@@ -85,8 +77,13 @@ export async function findExercice(req: Request, res: Response) {
   const { id } = req.params;
 
   try {
-    const { rows: movies } = await repos.findUnique(Number(id));
-    return res.send(movies);
+    const exercices = await repos.findUnique(Number(id));
+
+    if(exercices.rowCount === 0){
+      return res.sendStatus(404);
+    }
+
+    return res.send(exercices.rows);
     } catch {
       return res.sendStatus(500);
     }

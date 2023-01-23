@@ -9,7 +9,7 @@ server.use(cors());
 server.post("/exercices", control.postExercice);
 server.get("/exercices", control.getExercices);
 server.put("/exercices", control.updateExercice);
-server.delete("/exercices", control.deleteExercice);
+server.delete("/exercices/:id", control.deleteExercice);
 server.get('/exercices/:id', control.findExercice);
 
 server.listen(process.env.PORT, () => {
