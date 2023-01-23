@@ -1,4 +1,3 @@
-import { Request, Response } from "express";
 import express from "express";
 import cors from "cors";
 import * as control from "./controllers/exercice-controller.js";
@@ -9,7 +8,9 @@ server.use(cors());
 
 server.post("/exercices", control.postExercice);
 server.get("/exercices", control.getExercices);
+server.put("/exercices", control.updateExercice);
+server.delete("/exercices", control.deleteExercice);
 
-server.listen(4000, () => {
-  console.log("Ta executando...");
+server.listen(process.env.PORT, () => {
+  console.log(`SERVER RUNNING IN PORT: ${process.env.PORT}`);
 });
