@@ -51,3 +51,15 @@ export async function deleteUnique(exercice: Exercice): Promise<QueryResult> {
     [exercice.id]
   );
 }
+
+export async function findUnique(id: Number): Promise<QueryResult> {
+  return await connection.query(
+    `
+    SELECT * FROM
+      exercices
+    WHERE
+      id = $1;
+    `,
+    [id]
+  )
+}

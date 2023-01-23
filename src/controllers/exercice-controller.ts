@@ -80,3 +80,14 @@ export async function deleteExercice(req: Request, res: Response) {
     return res.sendStatus(500);
   }
 }
+
+export async function findExercice(req: Request, res: Response) {
+  const { id } = req.params;
+
+  try {
+    const { rows: movies } = await repos.findUnique(Number(id));
+    return res.send(movies);
+    } catch {
+      return res.sendStatus(500);
+    }
+}
